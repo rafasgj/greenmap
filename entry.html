@@ -5,31 +5,40 @@
         <title>Green Map Curitiba</title>
     </head>
     <body>
+        <div style="text-align:center;">
+            <img style="max-height:20vh; margin: auto 0;" src="greenmap.png">
+        </div>
         <section id="local">
-            <div class="container">
+            <div class="container" style="margin: 3px;">
                 <div id="map_canvas" style="width: 100%; height: 350px;"></div>
-                <input type="text" id="search-route" class="form-control" placeholder="Digite sua localiza&ccedil;&atilde;o">
-                <div id="directions-panel"></div>
             </div>
         </section>
             <form action="/action_page.php">
-            <div class="form-group">
-                <label for="email">Email address:</label>
-                <input type="email" class="form-control" id="email">
-            </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd">
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                <input class="form-check-input" type="checkbox"> Remember me
-                </label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="name" placeholder="Nome do Local">
+                </div>
+                <div class="form-group">
+                    <select class="form-control" placehorder="Tipo do Local" id="type">
+                        <option>Economia Verde</option>
+                        <option>Tecnologia & Design</option>
+                        <option>Mobilidade</option>
+                        <option>Riscos e Desafios</option>
+                        <option>Terra e Água</option>
+                        <option>Flora</option>
+                        <option>Fauna</option>
+                    </select>
+                </div>
+                <div style="text-align:center">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
         </form>
         <!-- jquery -->
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <!-- Google Maps -->
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
         <!-- Map handler -->

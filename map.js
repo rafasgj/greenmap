@@ -23,7 +23,25 @@ function show_map(latitude, longitude) {
                   map: map,
                   title:"Localização Atual"
     });
+
+    autocomplete = new google.maps.places.Autocomplete(
+        (document.getElementById('search-route')),
+        { types: ['geocode'] });
+    // When the user selects an address from the dropdown,
+    // populate the address fields in the form.
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+      calcRoute();
+    });
+
+    document.getElementById("search-route").addEventListener("keypress", function(e){
+        if (e.keyCode == 13) {
+            calcRoute();
+            return false;
+        }
+    });
 }
+
+show_map(0,0)
 
 function calcRoute(starte) {
   var start = document.getElementById("search-route").value;
@@ -42,19 +60,3 @@ function calcRoute(starte) {
   }
   });
 }
-
-autocomplete = new google.maps.places.Autocomplete(
-    (document.getElementById('search-route')),
-    { types: ['geocode'] });
-// When the user selects an address from the dropdown,
-// populate the address fields in the form.
-google.maps.event.addListener(autocomplete, 'place_changed', function() {
-  calcRoute();
-});
-
-document.getElementById("search-route").addEventListener("keypress", function(e){
-    if (e.keyCode == 13) {
-        calcRoute();
-        return false;
-    }
-});
