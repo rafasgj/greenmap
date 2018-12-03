@@ -5,7 +5,14 @@
         <title>Green Map Curitiba</title>
     </head>
     <body>
-        <form action="/action_page.php">
+        <section id="local">
+            <div class="container">
+                <div id="map_canvas" style="width: 100%; height: 350px;"></div>
+                <input type="text" id="search-route" class="form-control" placeholder="Digite sua localiza&ccedil;&atilde;o">
+                <div id="directions-panel"></div>
+            </div>
+        </section>
+            <form action="/action_page.php">
             <div class="form-group">
                 <label for="email">Email address:</label>
                 <input type="email" class="form-control" id="email">
@@ -21,24 +28,26 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <!-- -->
+        <!-- jquery -->
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <!-- Google Maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+        <!-- Map handler -->
+        <script src="map.js"></script>
+        <!-- Geolocation -->
         <script>
-        var apiGeolocationSuccess = function(position) {
-            alert("API geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
+        var geolocationSuccess = function(position) {
+            // call map!
+            show_map(position.coords.latitude, position.coords.longitude)
         };
 
         var tryAPIGeolocation = function() {
             jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDCa1LUe1vOczX1hO_iGYgyo8p_jYuGOPU", function(success) {
-                apiGeolocationSuccess({coords: {latitude: success.location.lat, longitude: success.location.lng}});
+                geolocationSuccess({coords: {latitude: success.location.lat, longitude: success.location.lng}});
           })
           .fail(function(err) {
             alert("API Geolocation error! \n\n"+err);
           });
-        };
-
-        var browserGeolocationSuccess = function(position) {
-            alert("Browser geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
         };
 
         var browserGeolocationFail = function(error) {
@@ -60,10 +69,10 @@
 
         var tryGeolocation = function() {
           if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                browserGeolocationSuccess,
-              browserGeolocationFail,
-              {maximumAge: 50000, timeout: 20000, enableHighAccuracy: true});
+              navigator.geolocation.getCurrentPosition(
+                  geolocationSuccess,
+                  browserGeolocationFail,
+                  {maximumAge: 50000, timeout: 20000, enableHighAccuracy: true});
           }
         };
 
